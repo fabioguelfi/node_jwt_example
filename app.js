@@ -22,6 +22,22 @@ app.post('/api/posts', verifyToken, (req, res) => {
   });
 });
 
+app.post('/api/profile', verifyToken, (req, res) => {  
+  jwt.verify(req.token, 'secretkey', (err, authData) => {
+    if(err) {
+      res.sendStatus(403);
+    } else {
+      res.json({
+        name: 'fabio',
+        lastName: 'guelfi',
+        age: 21,
+        address: 'av Paulista',
+        work: 'programmer',
+      });
+    }
+  });
+});
+
 app.post('/api/login', (req, res) => {
   // Mock user
   const user = {
